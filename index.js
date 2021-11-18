@@ -6,6 +6,17 @@ const session = require('express-session')
 const passport = require('./config/ppConfig')
 const flash = require('connect-flash')
 const isLoggedIn = require('./middleware/isLoggedIn')
+const bodyParser = require('body-parser')
+//var task = ["Buy socks", "Practice with nodejs"]
+const path = require('path')
+
+app.use(express.json())
+
+const users = []
+
+
+
+
 
 
 // views (ejs and layouts) set up
@@ -51,8 +62,34 @@ app.get('/profile', isLoggedIn, (req, res)=>{
     res.render('profile')
 })
 
+//index route
+app.get('/', function(req, res) {
+    res.render('index');
+})
+
+app.get('/users', (req, res) => {
+    const user = { name: req.body.name, password: req.body.password}
+    user.push(user)
+    res.status(201).send()
+})
+
+app.use(bodyParser.urlencoded({extended: true}));
+
+//post route for adding new task
+app.post('/addtask', function (req, res) {
+    var newTask = req.body.newtask;
+//add the new task from the post route into the array
+    task.push(newTask);
+//after adding to the array go back to the root route
+    res.redirect("/");
+});
+//render the ejs and display added task, task(index.ejs) = task(array)
+app.get("/", function(req, res) {    
+  res.render("index", { task: task, complete: complete });
+});
+
 
 app.listen(3000, ()=>{
     console.log(`process.env.SUPER_SECRET_SECRET ${process.env.SUPER_SECRET_SECRET}`)
-    console.log("auth_practice running on port 3000")
+    console.log("todo_app running on port 3000")
 })

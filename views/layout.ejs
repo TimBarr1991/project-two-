@@ -8,7 +8,18 @@
 </head>
 <body>
     <header>
-        <h1>Express Authentication Boilerplate</h1>
+        <h1>To Do App</h1>
+        <h2>Add Task</h2>
+        <div class="container">
+          <form action="/addtask" method="POST">
+              <input type="text" name="newtasks" placeholder="add new task">
+          <button>Add Task</button>
+          <h2>Remove Task</h2>
+              <input type="text" name="removetasks" placeholder="remove task">
+            <button action="/removetask" type="submit">Remove Task</button>
+          </form>
+          <h2>Previous Tasks Completed</h2>
+        </div>
         <nav>
             <ul>
               <% if (!currentUser) { %>
